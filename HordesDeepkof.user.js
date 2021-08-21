@@ -6,6 +6,8 @@
 // @match        http://www.hordes.fr/*
 // @icon         https://www.zupimages.net/up/21/33/s0im.png
 // @grant        none
+// @updateURL    https://github.com/Croaaa/HordesDeepkof/raw/main/HordesDeepkof.user.js
+// @downloadURL  https://github.com/Croaaa/HordesDeepkof/raw/main/HordesDeepkof.user.js
 // @require      https://tmp-staticserver.herokuapp.com/lib/KHLib-0.4.2.js
 // ==/UserScript==
 
