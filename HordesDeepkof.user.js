@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Hordes - deepkof
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @author       Killboy
+// @version      0.2
+// @author       Eliam
 // @match        http://www.hordes.fr/*
 // @icon         https://www.zupimages.net/up/21/33/s0im.png
 // @grant        none
@@ -25,11 +25,17 @@
 
     function deepkof() {
         var oldNode = document.getElementsByClassName(".tid_twinoidAvatar tid_default".slice(1));
+        let r = convertLetterToNumber(oldNode[0].textContent[0])*10;
+        let g = convertLetterToNumber(oldNode[0].textContent[1])*10;
+        let b = Math.round((r*g) / (260*260) * 255);
+        if (r == 260) {r = 255}
+        if (g == 260) {g = 255}
+        if (b == 260) {b = 255}
         for(let a=0 ; a<oldNode.length ; a++) {
             var newNode = document.createElement('img');
             newNode.className = oldNode[a].className;
             newNode.src = "https://www.zupimages.net/up/21/33/s0im.png";
-            newNode.style = "width:80px; height:80px; line-height:80px";
+            newNode.style = `width:80px; height:80px; line-height:80px; background-color:rgb(${r},${g},${b})`;
             oldNode[a].parentNode.replaceChild(newNode, oldNode[a]);
         }
     }
