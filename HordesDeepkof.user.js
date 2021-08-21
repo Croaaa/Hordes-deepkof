@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hordes - deepkof
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @author       Eliam
 // @match        http://www.hordes.fr/*
 // @icon         https://www.zupimages.net/up/21/33/s0im.png
@@ -25,25 +25,29 @@
 
     function convertLetterToNumber(str) {
         var out = 0, len = str.length;
-        for (pos = 0; pos < len; pos++) {
+        for (let pos = 0; pos < len; pos++) {
             out += (str.charCodeAt(pos) - 96) * Math.pow(26, len - pos - 1);
         }
         return out;
     }
 
+    function hsv2rgb(h,s,v)
+    {
+        let f= (n,k=(n+h/60)%6) => v - v*s*Math.max( Math.min(k,4-k,1), 0);
+        return [Math.round(f(5)*255),Math.round(f(3)*255),Math.round(f(1)*255)];
+    }
+
     function deepkof() {
         var oldNode = document.getElementsByClassName(".tid_twinoidAvatar tid_default".slice(1));
-        let r = convertLetterToNumber(oldNode[0].textContent[0])*10;
-        let g = convertLetterToNumber(oldNode[0].textContent[1])*10;
-        let b = Math.round((r*g) / (260*260) * 255);
-        if (r == 260) {r = 255}
-        if (g == 260) {g = 255}
-        if (b == 260) {b = 255}
         for(let a=0 ; a<oldNode.length ; a++) {
             var newNode = document.createElement('img');
+            let h = Math.round(360/26 * convertLetterToNumber(oldNode[a].textContent[0].toLowerCase())) + convertLetterToNumber(oldNode[a].textContent[0].toLowerCase());
+            let rgb = hsv2rgb(h,0.6,0.8);
+
+            // APPLY
             newNode.className = oldNode[a].className;
             newNode.src = "https://www.zupimages.net/up/21/33/s0im.png";
-            newNode.style = `width:80px; height:80px; line-height:80px; background-color:rgb(${r},${g},${b})`;
+            newNode.style = `width:80px; height:80px; line-height:80px; background-color:rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
             oldNode[a].parentNode.replaceChild(newNode, oldNode[a]);
         }
     }
