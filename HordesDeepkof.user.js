@@ -23,6 +23,14 @@
         forumInit: false,
     };
 
+    function convertLetterToNumber(str) {
+        var out = 0, len = str.length;
+        for (pos = 0; pos < len; pos++) {
+            out += (str.charCodeAt(pos) - 96) * Math.pow(26, len - pos - 1);
+        }
+        return out;
+    }
+
     function deepkof() {
         var oldNode = document.getElementsByClassName(".tid_twinoidAvatar tid_default".slice(1));
         let r = convertLetterToNumber(oldNode[0].textContent[0])*10;
