@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hordes - deepkof
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @author       Eliam
 // @match        http://www.hordes.fr/*
 // @icon         https://www.zupimages.net/up/21/33/s0im.png
@@ -41,10 +41,11 @@
         var oldNode = document.getElementsByClassName(".tid_twinoidAvatar tid_default".slice(1));
         for(let a=0 ; a<oldNode.length ; a++) {
             var newNode = document.createElement('img');
-            let h = Math.round(360/26 * convertLetterToNumber(oldNode[a].textContent[0].toLowerCase())) + convertLetterToNumber(oldNode[a].textContent[0].toLowerCase());
+            let h = Math.round(360/26 * convertLetterToNumber(oldNode[a].textContent[0].toLowerCase())) + convertLetterToNumber(oldNode[a].textContent[1].toLowerCase());
             let rgb = hsv2rgb(h,0.6,0.8);
 
             // APPLY
+            newNode.textContent = oldNode[a].textContent;
             newNode.className = oldNode[a].className;
             newNode.src = "https://www.zupimages.net/up/21/33/s0im.png";
             newNode.style = `width:80px; height:80px; line-height:80px; background-color:rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
