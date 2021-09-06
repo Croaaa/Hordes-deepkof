@@ -1,7 +1,8 @@
 // ==UserScript==
 // @name         Hordes - deepkof
+// @description  A mort les nudistes.
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.5
 // @author       Eliam
 // @match        http://www.hordes.fr/*
 // @icon         https://www.zupimages.net/up/21/33/s0im.png
